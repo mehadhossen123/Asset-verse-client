@@ -1,0 +1,49 @@
+import axios from "axios";
+import React, { useEffect } from "react";
+
+import { useNavigate } from "react-router";
+import useAuth from "./useAuth";
+
+const instance = axios.create({
+  baseURL: "http://localhost:5173",
+  
+});
+
+const useAxiosSecure = () => {
+  const navigate = useNavigate();
+  const { user, userLogout } =useAuth();
+
+  useEffect(() => {
+    const requestInterceptor = instance.interceptors.request.use((config) => {
+      if (user?.accessToken) {
+        config.headers.Authorization = `Bearer ${user.accessToken}`;
+      }
+
+      return config;
+    });
+
+    const responseInterceptor = instance.interceptors.response.use(
+      (response) => response,
+      (error) => {
+        const errorStatus = error.response?.status;
+
+        if (errorStatus === 401 || errorStatus === 403) {
+          userLogout().then(() => {
+            navigate("/login");
+          });
+        }
+
+        return Promise.reject(error);
+      }
+    );
+
+    return () => {
+      instance.interceptors.request.eject(requestInterceptor);
+      instance.interceptors.response.eject(responseInterceptor);
+    };
+  }, [user, userLogout, navigate]);
+
+  return instance;
+};
+
+export default useAxiosSecure;
