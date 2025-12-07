@@ -3,6 +3,7 @@ import React from "react";
 import { NavLink } from "react-router";
 
 import { Link } from "react-router";
+import Logo from "../Logo/Logo";
 // import useAuth from "../../Hooks/useAuth";
 
 
@@ -26,14 +27,35 @@ const Navbar = () => {
   const links = (
     <>
       <li>
-        <NavLink>Home</NavLink>
+        <NavLink
+        to="/"
+          className={({ isActive }) =>
+            isActive ? "text-white bg-green-500 rounded-2xl font-bold py-1 px-4" : ""
+          }
+        >
+          Home
+        </NavLink>
       </li>
 
       <li>
-        <NavLink to={"/send-parcel"}> Join as Employee </NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "text-white bg-green-500 font-bold rounded-2xl py-1 px-4" : ""
+          }
+          to="/auth/manager-register"
+        >
+          Join as HR Manager
+        </NavLink>
       </li>
       <li>
-        <NavLink to="/coverage">Join as HR Manager</NavLink>
+        <NavLink
+          className={({ isActive }) =>
+            isActive ? "text-white bg-green-500 font-bold rounded-2xl py-1 px-4" : ""
+          }
+          to="/auth/employee-register"
+        >
+          Join as HR Manager
+        </NavLink>
       </li>
 
       {/* {user && (
@@ -43,9 +65,7 @@ const Navbar = () => {
           </li>
         </>
       )} */}
-      <li>
-        <NavLink>About Us </NavLink>
-      </li>
+      
     </>
   );
   return (
@@ -77,7 +97,7 @@ const Navbar = () => {
           </ul>
         </div>
         <a className="btn btn-ghost text-xl">
-       ddd
+      <Logo></Logo>
         </a>
       </div>
       <div className="navbar-center hidden lg:flex">
