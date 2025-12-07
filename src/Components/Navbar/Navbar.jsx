@@ -1,11 +1,12 @@
-import React, { useState } from "react";
-import { NavLink, Link } from "react-router-dom"; // ✅ FIXED IMPORT
+import React, {  useState } from "react";
+import { NavLink, Link } from "react-router-dom"; // ✅ Correct import
 import Logo from "../Logo/Logo";
 import useAuth from "../../Hooks/useAuth";
 import Loader from "../Loading/Loader";
 
 const Navbar = () => {
   const { user, userLogout, loading } = useAuth();
+ console.log(user)
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   if (loading) {
@@ -98,7 +99,7 @@ const Navbar = () => {
       <div className="navbar-end flex items-center gap-4">
         {!user && <Link to={"/auth/login"}>Login</Link>}
 
-        {/* Profile Dropdown */}
+        {/* Profile always visible */}
         <div className="relative">
           <img
             className="w-[50px] h-[50px] rounded-full cursor-pointer"
@@ -106,18 +107,19 @@ const Navbar = () => {
               user?.photoURL || "https://www.w3schools.com/howto/img_avatar.png"
             }
             alt="profile"
-            onClick={() => setDropdownOpen(!dropdownOpen)}
+            onClick={() => user && setDropdownOpen(!dropdownOpen)} // ✅ only toggles if user exists
           />
+
+          {/* Dropdown only if user exists */}
           {dropdownOpen && user && (
             <ul className="absolute right-0 mt-2 w-44 bg-white shadow-lg rounded-lg py-2 z-50">
-              {/* New Items */}
               <li>
                 <Link
-                  to="/item-1"
+                  to="/auth/profile"
                   className="block px-4 py-2 hover:bg-green-100"
                   onClick={() => setDropdownOpen(false)}
                 >
-                  Item-1
+                 My Profile
                 </Link>
               </li>
               <li>
@@ -129,8 +131,6 @@ const Navbar = () => {
                   Item-2
                 </Link>
               </li>
-
-              {/* Existing Items */}
               <li>
                 <Link
                   to="/dashboard"
@@ -152,7 +152,7 @@ const Navbar = () => {
               <li>
                 <button
                   onClick={handleLogout}
-                  className="w-full text-left px-4 py-2 hover:bg-green-100"
+                  className="w-full text-left px-4 py-2 text-red-600 hover:bg-green-100"
                 >
                   Logout
                 </button>

@@ -5,6 +5,7 @@ import ManagerRegister from "../Manager/ManagerRegister";
 import AuthLayout from "../Layout/AuthLayout";
 import EmployeeRegister from "../Employee/EmployeeRegister";
 import Login from "../Auth/Login";
+import MyProfile from "../Employee/MyProfile";
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
       {
         path:"/auth/login",
         element:<Login></Login>
+      },
+      {
+        path:"/auth/profile",
+        element:<MyProfile></MyProfile>
       }
     ],
   },
