@@ -1,13 +1,19 @@
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import { NavLink, Link } from "react-router-dom"; // ✅ Correct import
 import Logo from "../Logo/Logo";
 import useAuth from "../../Hooks/useAuth";
 import Loader from "../Loading/Loader";
+import { CgProfile } from "react-icons/cg";
+import Swal from "sweetalert2";
+import { TbLogout2 } from "react-icons/tb";
+import { RxActivityLog } from "react-icons/rx";
 
 const Navbar = () => {
   const { user, userLogout, loading } = useAuth();
- console.log(user)
+
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  // find user specific role 
+  const {}=
 
   if (loading) {
     return <Loader />;
@@ -15,7 +21,15 @@ const Navbar = () => {
 
   const handleLogout = () => {
     userLogout()
-      .then(() => {})
+      .then(() => {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Logout successful",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      })
       .catch((err) => {
         console.log(err.message);
       });
@@ -119,42 +133,35 @@ const Navbar = () => {
                   className="block px-4 py-2 hover:bg-green-100"
                   onClick={() => setDropdownOpen(false)}
                 >
-                 My Profile
+                  <div className="flex items-center">
+                    <CgProfile />
+                    <span className="ml-1 font-bold"> My Profile</span>
+                  </div>
                 </Link>
               </li>
-              <li>
-                <Link
-                  to="/item-2"
-                  className="block px-4 py-2 hover:bg-green-100"
-                  onClick={() => setDropdownOpen(false)}
-                >
-                  Item-2
-                </Link>
-              </li>
+              <li></li>
               <li>
                 <Link
                   to="/dashboard"
                   className="block px-4 py-2 hover:bg-green-100"
                   onClick={() => setDropdownOpen(false)}
                 >
-                  Dashboard
+                  <div className="flex items-center">
+                    <RxActivityLog />
+                    <span className="ml-1 font-bold">Dashboard</span>
+                  </div>
                 </Link>
               </li>
-              <li>
-                <Link
-                  to="/settings"
-                  className="block px-4 py-2 hover:bg-green-100"
-                  onClick={() => setDropdownOpen(false)}
-                >
-                  Settings
-                </Link>
-              </li>
+              <li></li>
               <li>
                 <button
                   onClick={handleLogout}
                   className="w-full text-left px-4 py-2 text-red-600 hover:bg-green-100"
                 >
-                  Logout
+                  <div className="flex items-center">
+                    <TbLogout2 />
+                    <span className="ml-1 font-bold">Logout</span>
+                  </div>
                 </button>
               </li>
             </ul>

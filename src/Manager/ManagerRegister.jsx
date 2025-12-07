@@ -26,6 +26,7 @@ const ManagerRegister = () => {
 
 
       const userPostInfo = {
+        role: "hr",
         managerName: data.managerName,
         managerEmail: data.managerEmail,
         companyName: data.companyName,
