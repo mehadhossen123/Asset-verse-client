@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavLink, Link } from "react-router-dom"; // ✅ Correct import
+import { NavLink, Link } from "react-router-dom"; // 
 import Logo from "../Logo/Logo";
 import useAuth from "../../Hooks/useAuth";
 import Loader from "../Loading/Loader";
@@ -7,14 +7,22 @@ import { CgProfile } from "react-icons/cg";
 import Swal from "sweetalert2";
 import { TbLogout2 } from "react-icons/tb";
 import { RxActivityLog } from "react-icons/rx";
+import useRole from "../../Hooks/useRole";
+
+
 
 const Navbar = () => {
   const { user, userLogout, loading } = useAuth();
+  const {userRole}=useRole()
+  console.log(userRole)
+
+ 
+  
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   // find user specific role 
-  const {}=
-
+  
+  
   if (loading) {
     return <Loader />;
   }

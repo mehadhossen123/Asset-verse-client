@@ -4,9 +4,9 @@ import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 import useAuth from "./useAuth";
 
+
 const instance = axios.create({
-  baseURL: "http://localhost:5173",
-  
+  baseURL: "http://localhost:5000",
 });
 
 const useAxiosSecure = () => {
@@ -16,7 +16,7 @@ const useAxiosSecure = () => {
   useEffect(() => {
     const requestInterceptor = instance.interceptors.request.use((config) => {
       if (user?.accessToken) {
-        config.headers.Authorization = `Bearer ${user.accessToken}`;
+        config.headers.Authorization = `Bearer${user.accessToken}`;
       }
 
       return config;
