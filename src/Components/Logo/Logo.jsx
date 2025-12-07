@@ -4,7 +4,7 @@ import logo from '../../assets/icons8-asset-64.png'
 const Logo = () => {
     return (
         <div>
-            <img src={logo} alt="" />
+            <img className='w-[50px] h-[60px] cursor-pointer'  src={logo} alt="" />
             
         </div>
     );

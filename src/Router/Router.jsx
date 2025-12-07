@@ -4,6 +4,7 @@ import Home from "../Pages/Home";
 import ManagerRegister from "../Manager/ManagerRegister";
 import AuthLayout from "../Layout/AuthLayout";
 import EmployeeRegister from "../Employee/EmployeeRegister";
+import Login from "../Auth/Login";
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ export const router = createBrowserRouter([
         path: "/auth/employee-register",
         element: <EmployeeRegister></EmployeeRegister>
       },
+      {
+        path:"/auth/login",
+        element:<Login></Login>
+      }
     ],
   },
 ]);

@@ -1,9 +1,19 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
 
 const EmployeeRegister = () => {
+     const {
+        register,
+        handleSubmit,
+        formState: { errors },
+      } = useForm();
+
+      const handleEmployeeRegister=data=>{
+        console.log(data)
+      }
     return (
       <div>
-        <form className="max-w-lg mx-auto p-6 bg-base-100 shadow-xl rounded-xl space-y-4">
+        <form  onSubmit={handleSubmit(handleEmployeeRegister)} className="max-w-lg mx-auto p-6 bg-base-100 shadow-xl rounded-xl space-y-4">
           <h2 className="text-2xl font-bold text-center mb-4">
             Join as Employee
           </h2>

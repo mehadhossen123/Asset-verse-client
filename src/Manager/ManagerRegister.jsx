@@ -1,8 +1,13 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router";
+import useAuth from "../Hooks/useAuth";
+import useAxios from "../Hooks/useAxios";
+import Swal from "sweetalert2";
 
 const ManagerRegister = () => {
+  const { userRegister } = useAuth();
+  const axios = useAxios();
   // Rect form hook
   const {
     register,
@@ -11,8 +16,45 @@ const ManagerRegister = () => {
   } = useForm();
 
   // Handle register for
-  const handleManagerRegister = (data) => {
-    console.log(data);
+  const handleManagerRegister = async(data) => {
+     //Prepare form data for image
+    try{
+       const image = data.companyLogo[0];
+    const formData = new FormData();
+    formData.append("image", image);
+    const image_api_url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMG_API_KEY
+    }`;
+      // Post image to get url .using imageBB
+        const res=await axios.post(image_api_url, formData)
+       const logo = res.data.data.display_url; //image url
+      
+      //  User register 
+       await userRegister(data.managerEmail, data.managerPassword)
+      
+    
+  // post manager info 
+        const userPostInfo = {
+          managerName: data.managerName,
+          managerEmail: data.managerEmail,
+          companyName: data.companyName,
+          managerDateOfBirth:data.managerDateOfBirth,
+          companyLogo:logo,
+        };
+        await axios.post("/users",userPostInfo)
+         Swal.fire({
+           icon: "success",
+           title: "Registered Successfully!",
+           text: "You can now login as HR Manager",
+           confirmButtonText: "OK",
+         });
+
+    }
+    catch(error){
+      console.log(error)
+    }
+
+      
+     
   };
 
   return (
@@ -75,7 +117,6 @@ const ManagerRegister = () => {
             {...register("companyLogo")}
             type="file"
             className="file-input file-input-primary w-full file-input-bordered"
-        
           />
         </div>
 
@@ -142,7 +183,7 @@ const ManagerRegister = () => {
         <div>
           <p>
             Already have an account?{" "}
-            <Link className="text-green-400 hover:underline ">login</Link>
+            <Link to={"/auth/login"} className="text-green-400 hover:underline ">login</Link>
           </p>
         </div>
       </form>
