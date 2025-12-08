@@ -6,6 +6,9 @@ import AuthLayout from "../Layout/AuthLayout";
 import EmployeeRegister from "../Employee/EmployeeRegister";
 import Login from "../Auth/Login";
 import MyProfile from "../Employee/MyProfile";
+import DashboardLayout from "../Dashoard/DashboardLayout";
+import PrivateRoute from "./PrivateRoute";
+import AddAsset from "../Dashoard/AddAsset";
 
 export const router = createBrowserRouter([
   {
@@ -25,20 +28,32 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/auth/manager-register",
-        element: <ManagerRegister></ManagerRegister>,
+        element: (
+          <PrivateRoute>
+            <ManagerRegister></ManagerRegister>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/auth/employee-register",
-        element: <EmployeeRegister></EmployeeRegister>
+        element: <EmployeeRegister></EmployeeRegister>,
       },
       {
-        path:"/auth/login",
-        element:<Login></Login>
+        path: "/auth/login",
+        element: <Login></Login>,
       },
       {
-        path:"/auth/profile",
-        element:<MyProfile></MyProfile>
-      }
+        path: "/auth/profile",
+        element: <MyProfile></MyProfile>,
+      },
     ],
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout></DashboardLayout>,
+    children: [{
+      path:"/dashboard/add-asset",
+      element:<AddAsset></AddAsset>
+    }],
   },
 ]);
