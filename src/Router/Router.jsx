@@ -15,7 +15,12 @@ import RequestAsset from "../Employee/RequestAsset";
 import EmployeeRoute from "./EmployeeRoute";
 import AssetDetails from "../Employee/AssetDetails";
 
+
+
+
+
 export const router = createBrowserRouter([
+  
   {
     path: "",
     element: <HomeLayout></HomeLayout>,
@@ -81,7 +86,7 @@ export const router = createBrowserRouter([
       {
         path:"/dashboard/:id",
         element:<AssetDetails></AssetDetails>,
-        loader:({params})=>fetch(`/dashboard/${params.id}`)
+       
       }
     ],
   },

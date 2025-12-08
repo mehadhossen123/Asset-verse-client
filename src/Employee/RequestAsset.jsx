@@ -1,9 +1,11 @@
 import React from "react";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router";
 
 const RequestAsset = () => {
   const axiosSecure = useAxiosSecure();
+  const navigate=useNavigate()
 
   const { data: requestAsset = [] } = useQuery({
     queryKey: ["assets"],
@@ -14,7 +16,7 @@ const RequestAsset = () => {
   });
 
   const handleViewDetails = (id) => {
-    navigate(`/assets/${id}`);
+    navigate(`/dashboard/${id}`);
   };
 
 
@@ -51,7 +53,7 @@ const RequestAsset = () => {
               </p>
 
               {/* View Details Button */}
-              <button onClick={()=>} className="button">
+              <button onClick={() => handleViewDetails(asset._id)} className="button">
                 View Details
               </button>
             </div>
