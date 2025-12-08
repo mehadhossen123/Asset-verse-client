@@ -11,6 +11,9 @@ import PrivateRoute from "./PrivateRoute";
 import AddAsset from "../Dashoard/AddAsset";
 import HrRoute from "./HrRoute";
 import HrAssetList from "../Manager/HrAssetList";
+import RequestAsset from "../Employee/RequestAsset";
+import EmployeeRoute from "./EmployeeRoute";
+import AssetDetails from "../Employee/AssetDetails";
 
 export const router = createBrowserRouter([
   {
@@ -30,11 +33,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/auth/manager-register",
-        element: (
-         
-            <ManagerRegister></ManagerRegister>
-         
-        ),
+        element: <ManagerRegister></ManagerRegister>,
       },
       {
         path: "/auth/employee-register",
@@ -53,17 +52,37 @@ export const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <DashboardLayout></DashboardLayout>,
-    children: [{
-      path:"/dashboard/add-asset",
-      element:<HrRoute>
-      <AddAsset></AddAsset>
-      </HrRoute>
-    },{
-      path:"/dashboard/asset-list",
-      element:<HrRoute>
-      <HrAssetList></HrAssetList>
-      </HrRoute>
-    }
-  ],
+    children: [
+      {
+        path: "/dashboard/add-asset",
+        element: (
+          <HrRoute>
+            <AddAsset></AddAsset>
+          </HrRoute>
+        ),
+      },
+      {
+        path: "/dashboard/asset-list",
+        element: (
+          <HrRoute>
+            <HrAssetList></HrAssetList>
+          </HrRoute>
+        ),
+      },
+      {
+        path: "/dashboard/request-an-asset",
+        element: (
+          <EmployeeRoute>
+            <RequestAsset></RequestAsset>
+          </EmployeeRoute>
+        )
+       
+      },
+      {
+        path:"/dashboard/:id",
+        element:<AssetDetails></AssetDetails>,
+        loader:({params})=>fetch(`/dashboard/${params.id}`)
+      }
+    ],
   },
 ]);

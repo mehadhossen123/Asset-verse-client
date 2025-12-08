@@ -24,21 +24,28 @@ const HrAssetList = () => {
             {/* head */}
             <thead>
               <tr>
-                <th className='text-black font-bold text-center'>#</th>
-                <th className='text-black font-bold text-center mr-5'> All posted Product </th>
-                <th className='text-black font-bold text-center'>Product Type</th>
-                <th className='text-black font-bold text-center'>Product Quantity</th>
-                <th className='text-black font-bold text-center'>Post date </th>
-                <th className='text-black font-bold text-center'>Actions</th>
+                <th className="text-black font-bold text-center">#</th>
+                <th className="text-black font-bold text-center mr-5">
+                  {" "}
+                  All posted Product{" "}
+                </th>
+                <th className="text-black font-bold text-center">
+                  Product Type
+                </th>
+                <th className="text-black font-bold text-center">
+                  Product Quantity
+                </th>
+                <th className="text-black font-bold text-center">Post date </th>
+                <th className="text-black font-bold text-center">Actions</th>
               </tr>
             </thead>
             <tbody>
               {/* row 1 */}
               {hrAssets.map((asset, i) => (
                 <tr key={i}>
-                  <td className='text-center'> {i + 1}</td>
+                  <td className="text-center"> {i + 1}</td>
 
-                  <td className=''>
+                  <td className="">
                     <div className="flex items-center gap-3">
                       <div className="avatar">
                         <div className="mask mask-squircle h-12 w-12">
@@ -53,13 +60,16 @@ const HrAssetList = () => {
                       </div>
                     </div>
                   </td>
-                  <td className='text-center'>{asset.productType}</td>
-                  <td className='text-center'>
+                  <td className="text-center">{asset.productType}</td>
+                  <td className="text-center">
                     <br />
                     {asset.productQuantity}
                   </td>
-                  <td className='text-center'>{asset.dateAdded}</td>
-                  <td className='text-center'>
+                  <td className="text-center">
+                    {" "}
+                    {new Date(asset.dateAdded).toLocaleDateString()}
+                  </td>
+                  <td className="text-center">
                     <button className="px-6 py-1 text-2xl cursor-pointer mr-4 bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-cyan-400 hover:to-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-300">
                       <FaRegEdit />
                     </button>

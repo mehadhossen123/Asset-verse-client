@@ -115,7 +115,7 @@ const DashboardLayout = () => {
                 <>
                   <li>
                     <Link
-                      to={"/dashboard/add-asset"}
+                      to={"/dashboard/request-an-asset"}
                       className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                       data-tip="Request an asset"
                     >

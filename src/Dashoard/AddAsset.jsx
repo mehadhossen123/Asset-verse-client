@@ -134,7 +134,7 @@ const AddAsset = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white mt-3 py-2 cursor-pointer rounded-md text-sm hover:bg-blue-700 transition"
+            className="w-full cursor-pointer button"
           >
             Add Product
           </button>
