@@ -146,7 +146,7 @@ const EmployeeRegister = () => {
           </div>
 
           {/* Submit Button */}
-          <button type="submit" className="btn btn-primary w-full mt-4">
+          <button type="submit" className="button w-full mt-4">
             Register as Employee
           </button>
         </form>

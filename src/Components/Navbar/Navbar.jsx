@@ -13,9 +13,8 @@ import useRole from "../../Hooks/useRole";
 
 const Navbar = () => {
   const { user, userLogout, loading } = useAuth();
-  const {userRole}=useRole()
-  console.log(userRole)
-
+  // const {userRole}=useRole()
+ 
  
   
 

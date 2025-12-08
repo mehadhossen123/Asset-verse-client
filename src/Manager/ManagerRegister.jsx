@@ -206,7 +206,7 @@ const ManagerRegister = () => {
         {/* Submit Button */}
         <button
           type="submit"
-          className="btn btn-primary w-full text-lg font-semibold mt-4"
+          className="button w-full text-center"
         >
           Register as HR Manager
         </button>

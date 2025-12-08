@@ -9,6 +9,8 @@ import MyProfile from "../Employee/MyProfile";
 import DashboardLayout from "../Dashoard/DashboardLayout";
 import PrivateRoute from "./PrivateRoute";
 import AddAsset from "../Dashoard/AddAsset";
+import HrRoute from "./HrRoute";
+import HrAssetList from "../Manager/HrAssetList";
 
 export const router = createBrowserRouter([
   {
@@ -29,9 +31,9 @@ export const router = createBrowserRouter([
       {
         path: "/auth/manager-register",
         element: (
-          <PrivateRoute>
+         
             <ManagerRegister></ManagerRegister>
-          </PrivateRoute>
+         
         ),
       },
       {
@@ -53,7 +55,15 @@ export const router = createBrowserRouter([
     element: <DashboardLayout></DashboardLayout>,
     children: [{
       path:"/dashboard/add-asset",
-      element:<AddAsset></AddAsset>
-    }],
+      element:<HrRoute>
+      <AddAsset></AddAsset>
+      </HrRoute>
+    },{
+      path:"/dashboard/asset-list",
+      element:<HrRoute>
+      <HrAssetList></HrAssetList>
+      </HrRoute>
+    }
+  ],
   },
 ]);

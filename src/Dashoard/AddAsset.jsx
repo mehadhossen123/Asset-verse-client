@@ -1,9 +1,13 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 import useAxios from "../Hooks/useAxios";
+import useAxiosSecure from "../Hooks/useAxiosSecure";
 
 const AddAsset = () => {
+    const axiosSecure=useAxiosSecure()
     const axios=useAxios()
+  
   const {
     reset,
     register,
@@ -12,18 +16,17 @@ const AddAsset = () => {
   } = useForm();
 
   const handleAddProduct = async (data) => {
-    console.log(data);
+
     //  Upload product image
-    const productImage = data.companyLogo[0];
-    const formData1 = new FormData();
-    formData1.append("image", productImage);
+    const productImage = data.productImage[0];
+    const formData = new FormData();
+    formData.append("image", productImage);
 
-    const image_api_url = `https://api.imgbb.com/1/upload?key=${
-      import.meta.env.VITE_IMG_API_KEY
-    }`;
+    const image_api_url =`https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMG_API_KEY }`;
 
-    const profileRes = await axios.post(image_api_url,formData1);
-    const productImageUrl= profileRes.data.data.display_url;
+    const product_image_url = await axios .post(image_api_url,formData);
+    const productImageUrl= product_image_url.data.data.display_url;
+  
     const productInfo = {
       productName: data.productName,
       productImage: productImageUrl,
@@ -31,7 +34,15 @@ const AddAsset = () => {
       productQuantity:data.productQuantity,
 
     };
-    await axios.post("")
+    await axiosSecure.post("/assets",productInfo)
+    reset()
+    Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Asset added successful",
+              showConfirmButton: false,
+              timer: 1500,
+            });
   };
 
   return (
@@ -123,7 +134,7 @@ const AddAsset = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white mt-3 py-2 rounded-md text-sm hover:bg-blue-700 transition"
+            className="w-full bg-blue-600 text-white mt-3 py-2 cursor-pointer rounded-md text-sm hover:bg-blue-700 transition"
           >
             Add Product
           </button>

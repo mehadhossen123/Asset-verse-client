@@ -1,6 +1,8 @@
 import React from 'react';
 import useRole from '../Hooks/useRole';
 import Loader from '../Components/Loading/Loader';
+import Forbidden from '../Components/Forbidden';
+
 
 const HrRoute = ({children}) => {
     const { userRole, roleLoading } = useRole();

@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router";
 
 import useAuth from "../Hooks/useAuth";
+import "../../src/CustomItem/buttonOne.css";
 
 const Login = () => {
   const location = useLocation();
@@ -81,30 +82,21 @@ const Login = () => {
         </Link>
 
         {/* Submit Button */}
-        <button
-          type="submit"
-          className="btn bg-primary text-black btn-neutral w-full h-12 text-lg mt-2"
-        >
+        <button type="submit" className="button w-full">
           Login
         </button>
 
-        {/* Login Link */}
+        {/* Login Link
         <p className="text-center text-gray-500 mt-2">
           New here? please{" "}
           <Link
-            to="/register"
+            to="/auth/manager-register"
             state={location.state}
             className="link link-hover font-semibold"
           >
             Register
           </Link>
-        </p>
-
-        {/* Divider */}
-        <div className="divider divider-neutral">or</div>
-
-        {/* Google Login Button */}
-       
+        </p> */}
       </form>
     </div>
   );

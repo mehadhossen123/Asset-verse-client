@@ -2,6 +2,8 @@ import React from "react";
 import { Link, Outlet } from "react-router";
 import useRole from "../Hooks/useRole";
 import { MdWebAsset } from "react-icons/md";
+import { FaListOl } from "react-icons/fa";
+import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
 
 const DashboardLayout = () => {
   const { userRole } = useRole();
@@ -74,9 +76,24 @@ const DashboardLayout = () => {
                   </span>
                 </Link>
               </li>
+              {/* HR role based router  */}
 
               {userRole === "hr" && (
                 <>
+                  <li>
+                    <Link
+                      to={"/dashboard/asset-list"}
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Asset list"
+                    >
+                      {/* Home icon */}
+                      <FaListOl />
+
+                      <span className="is-drawer-close:hidden text-green-500 font-bold">
+                        Asset list
+                      </span>
+                    </Link>
+                  </li>
                   <li>
                     <Link
                       to={"/dashboard/add-asset"}
@@ -88,6 +105,25 @@ const DashboardLayout = () => {
 
                       <span className="is-drawer-close:hidden text-green-500 font-bold">
                         Add asset
+                      </span>
+                    </Link>
+                  </li>
+                </>
+              )}
+              {/* Employee role based route  */}
+              {userRole === "employee" && (
+                <>
+                  <li>
+                    <Link
+                      to={"/dashboard/add-asset"}
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Request an asset"
+                    >
+                      {/* Home icon */}
+                      <VscGitPullRequestGoToChanges />
+
+                      <span className="is-drawer-close:hidden text-green-500 font-bold">
+                        Request an asset
                       </span>
                     </Link>
                   </li>
