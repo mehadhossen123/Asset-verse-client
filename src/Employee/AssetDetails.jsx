@@ -5,6 +5,7 @@ import useAxiosSecure from "../Hooks/useAxiosSecure";
 import Loader from "../Components/Loading/Loader";
 import { motion } from "framer-motion";
 import useAuth from "../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 
 const AssetDetails = () => {
@@ -41,6 +42,7 @@ isLoading,
     );
   }
 
+
   const handleProductRequest=(data)=>{
     const assetInfo = {
       assetId: data._id,
@@ -50,11 +52,25 @@ isLoading,
       requesterName:user?.displayName,
       requesterEmail:user?.email,
       requestStatus:'pending',
-      note:''
+      note:'',
+      hrEmail:data.hrEmail,
+      companyName:data.companyName
+
 
 
     };
-    console.log(assetInfo)
+   axiosSecure.post("/requests",assetInfo).then((res)=>{
+    console.log(res)
+    if( res.data.data.insertedId){
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Your request is pending ",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+   })
 
   }
 
@@ -71,7 +87,7 @@ isLoading,
       {/* Go Back Button */}
       <button
         onClick={() => navigate(-1)}
-        className="mb-6 px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 rounded-lg shadow-sm transition"
+        className="mb-6 px-4 py-2 bg-gray-200 cursor-pointer hover:bg-gray-300 text-gray-800 rounded-lg shadow-sm transition"
       >
         ← Go Back
       </button>

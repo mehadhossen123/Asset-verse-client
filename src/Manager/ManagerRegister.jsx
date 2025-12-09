@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 import useAxios from "../Hooks/useAxios";
 import Swal from "sweetalert2";
@@ -9,6 +9,7 @@ import PageWarper from "../CustomItem/PageWarper";
 const ManagerRegister = () => {
   const { userRegister, updateUserProfile } = useAuth();
   const axios = useAxios();
+  const navigate=useNavigate()
 
   const {
     reset,
@@ -38,6 +39,7 @@ const ManagerRegister = () => {
 
       await axios.post("/users", userPostInfo);
       reset();
+      navigate("/")
 
       Swal.fire({
         icon: "success",
@@ -55,7 +57,7 @@ const ManagerRegister = () => {
       <div className="min-h-screen bg-black flex mt-20 items-center justify-center  py-10 px-4">
         <form
           onSubmit={handleSubmit(handleManagerRegister)}
-          className="w-full max-w-4xl bg-white shadow-xl rounded-2xl p-8 space-y-6"
+          className="w-full max-w-4xl text-white shadow-xl rounded-2xl p-8 space-y-6"
         >
           <h2 className="text-4xl text-yellow-700 font-extrabold text-center text-gray-800">
             Join as HR Manager

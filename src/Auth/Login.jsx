@@ -9,6 +9,7 @@ import PageWarper from "../CustomItem/PageWarper";
 
 const Login = () => {
   const location = useLocation();
+  
 
 
 
@@ -20,10 +21,12 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const handleLogin = (data) => {
+  
     // console.log(data)
     userSignIn(data.email, data.password)
       .then((res) => {
-        navigate(location?.state || "/");
+       
+        navigate(location?.state||"/");
       })
       .catch((error) => {
         console.log(error.message);

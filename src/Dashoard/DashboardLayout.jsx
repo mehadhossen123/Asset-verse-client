@@ -4,6 +4,7 @@ import useRole from "../Hooks/useRole";
 import { MdWebAsset } from "react-icons/md";
 import { FaListOl } from "react-icons/fa";
 import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
+import { RiPassPendingLine } from "react-icons/ri";
 
 const DashboardLayout = () => {
   const { userRole } = useRole();
@@ -35,7 +36,9 @@ const DashboardLayout = () => {
                 <path d="M14 10l2 2l-2 2"></path>
               </svg>
             </label>
-            <div className="px-4 text-yellow-700 font-bold">AssetVerse Title</div>
+            <div className="px-4 text-yellow-700 font-bold">
+              AssetVerse Title
+            </div>
           </nav>
           {/* Page content here */}
           <Outlet></Outlet>
@@ -105,6 +108,20 @@ const DashboardLayout = () => {
 
                       <span className="is-drawer-close:hidden text-green-500 font-bold">
                         Add asset
+                      </span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to={"/dashboard/requested-asset"}
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="Requested Asset"
+                    >
+                      {/* Home icon */}
+                      <RiPassPendingLine />
+
+                      <span className="is-drawer-close:hidden text-green-500 font-bold">
+                        Requested Asset
                       </span>
                     </Link>
                   </li>

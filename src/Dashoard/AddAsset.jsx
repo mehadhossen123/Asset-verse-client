@@ -16,7 +16,7 @@ const AddAsset = () => {
   } = useForm();
 
   const handleAddProduct = async (data) => {
-
+    console.log(data);
     //  Upload product image
     const productImage = data.productImage[0];
     const formData = new FormData();
@@ -48,7 +48,7 @@ const AddAsset = () => {
   return (
     <div>
       <div className="w-full max-w-md mx-auto mt-8 p-5 bg-white shadow-md rounded-lg">
-        <h2 className="text-xl font-semibold mb-5 text-center">
+        <h2 className="text-2xl font-bold text-yellow-700 mb-5 text-center">
           Add New Product
         </h2>
 
@@ -134,7 +134,7 @@ const AddAsset = () => {
           {/* Submit Button */}
           <button
             type="submit"
-            className="w-full cursor-pointer button"
+            className="w-full bg-blue-600 text-white mt-3 py-2 cursor-pointer rounded-md text-sm hover:bg-blue-700 transition"
           >
             Add Product
           </button>

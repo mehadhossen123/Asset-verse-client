@@ -4,10 +4,12 @@ import useAuth from '../Hooks/useAuth';
 import useAxios from '../Hooks/useAxios';
 import Swal from 'sweetalert2';
 import PageWarper from '../CustomItem/PageWarper';
+import { useNavigate } from 'react-router';
 
 const EmployeeRegister = () => {
     const { userRegister, updateUserProfile } = useAuth();
     const axios=useAxios()
+    const navigate=useNavigate()
      const {
         reset,
         register,
@@ -34,6 +36,7 @@ const EmployeeRegister = () => {
         
               await axios.post("/users", userPostInfo);
               reset();
+              navigate("/")
         
               Swal.fire({
                 icon: "success",

@@ -57,7 +57,20 @@ const Navbar = () => {
           Home
         </NavLink>
       </li>
-      {!user && (
+      {user ? (
+        <li>
+          <NavLink
+          to={"/dashboard"}
+            className={({ isActive }) =>
+              isActive
+                ? "text-white bg-green-500 font-bold rounded-2xl py-1 px-4"
+                : "text-yellow-700 font-bold"
+            }
+          >
+           Dashboard
+          </NavLink>
+        </li>
+      ) : (
         <>
           <li>
             <NavLink
@@ -143,11 +156,11 @@ const Navbar = () => {
 
           {/* Dropdown only if user exists */}
           {dropdownOpen && user && (
-            <ul className="absolute right-0 mt-2 w-44 bg-white shadow-lg rounded-lg py-2 z-50">
+            <ul className="absolute right-0 mt-2 w-44 text-white shadow-lg rounded-lg py-2 z-50">
               <li>
                 <Link
                   to="/auth/profile"
-                  className="block px-4 py-2 hover:bg-green-100"
+                  className="block px-4 py-2 "
                   onClick={() => setDropdownOpen(false)}
                 >
                   <div className="flex items-center">
@@ -160,7 +173,7 @@ const Navbar = () => {
               <li>
                 <Link
                   to="/dashboard"
-                  className="block px-4 py-2 hover:bg-green-100"
+                  className="block px-4 py-2 "
                   onClick={() => setDropdownOpen(false)}
                 >
                   <div className="flex items-center">
@@ -173,7 +186,7 @@ const Navbar = () => {
               <li>
                 <button
                   onClick={handleLogout}
-                  className="w-full text-left px-4 py-2 text-red-600 hover:bg-green-100"
+                  className="w-full text-left px-4 py-2 text-red-600 "
                 >
                   <div className="flex items-center">
                     <TbLogout2 />

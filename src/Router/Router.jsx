@@ -14,13 +14,13 @@ import HrAssetList from "../Manager/HrAssetList";
 import RequestAsset from "../Employee/RequestAsset";
 import EmployeeRoute from "./EmployeeRoute";
 import AssetDetails from "../Employee/AssetDetails";
+import RequestedAsset from "../Dashoard/RequestedAsset";
 
 
 
 
 
 export const router = createBrowserRouter([
-  
   {
     path: "",
     element: <HomeLayout></HomeLayout>,
@@ -80,13 +80,21 @@ export const router = createBrowserRouter([
           <EmployeeRoute>
             <RequestAsset></RequestAsset>
           </EmployeeRoute>
-        )
-       
+        ),
       },
       {
-        path:"/dashboard/:id",
-        element:<AssetDetails></AssetDetails>,
-       
+        path: "/dashboard/:id",
+        element: (
+          <EmployeeRoute>
+            <AssetDetails></AssetDetails>
+          </EmployeeRoute>
+        ),
+      },
+      {
+        path:"/dashboard/requested-asset",
+        element:<HrRoute>
+        <RequestedAsset></RequestedAsset>
+        </HrRoute>
       }
     ],
   },
