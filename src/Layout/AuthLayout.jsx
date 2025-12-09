@@ -1,18 +1,22 @@
 import React from 'react';
 import Navbar from '../Components/Navbar/Navbar';
-import { Outlet } from 'react-router';
+import { Outlet, useLocation } from 'react-router';
 import Footer from '../Components/Footer';
+import { AnimatePresence } from 'framer-motion';
 
 const AuthLayout = () => {
+  const location=useLocation()
     return (
-      <div>
-        <div className="max-w-7xl mx-auto min-h-screen flex flex-col">
+      <div className=''>
+        <div className="max-w-7xl mx-auto min-h-screen bg-black flex flex-col">
           <header>
             <Navbar />
           </header>
 
           <main className="flex-grow">
-            <Outlet />
+            <AnimatePresence mode='wait'>
+              <Outlet key={location.pathname} />
+            </AnimatePresence>
           </main>
 
           <footer>

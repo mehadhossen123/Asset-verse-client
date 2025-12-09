@@ -8,7 +8,7 @@ import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
 const DashboardLayout = () => {
   const { userRole } = useRole();
   return (
-    <div>
+    <div className="bg-black">
       <div className="drawer lg:drawer-open">
         <input id="my-drawer-4" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
@@ -35,7 +35,7 @@ const DashboardLayout = () => {
                 <path d="M14 10l2 2l-2 2"></path>
               </svg>
             </label>
-            <div className="px-4">Navbar Title</div>
+            <div className="px-4 text-yellow-700 font-bold">AssetVerse Title</div>
           </nav>
           {/* Page content here */}
           <Outlet></Outlet>

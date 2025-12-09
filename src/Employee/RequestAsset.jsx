@@ -2,12 +2,14 @@ import React from "react";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
+import { motion } from "framer-motion";
+import Loader from "../Components/Loading/Loader";
 
 const RequestAsset = () => {
   const axiosSecure = useAxiosSecure();
   const navigate=useNavigate()
 
-  const { data: requestAsset = [] } = useQuery({
+  const { data: requestAsset = [] ,isLoading} = useQuery({
     queryKey: ["assets"],
     queryFn: async () => {
       const res = await axiosSecure.get(`/assets`);
@@ -18,6 +20,9 @@ const RequestAsset = () => {
   const handleViewDetails = (id) => {
     navigate(`/dashboard/${id}`);
   };
+  if(isLoading){
+    return<Loader></Loader>
+  }
 
 
   return (
@@ -28,15 +33,19 @@ const RequestAsset = () => {
 
       <div className="grid lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-6">
         {requestAsset.map((asset) => (
-          <div
+          <motion.div
+            style={{
+            }}
+            whileHover={{ scale:1.05 }}
             key={asset._id}
             className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 flex flex-col"
           >
             {/* Asset Image */}
             <img
+             
               src={asset.productImage}
               alt={asset.productName}
-              className="w-full h-48 object-cover"
+              className="w-full h-48 object-cover hover:scale-110 hover:duration-1000"
             />
 
             {/* Asset Info */}
@@ -53,11 +62,14 @@ const RequestAsset = () => {
               </p>
 
               {/* View Details Button */}
-              <button onClick={() => handleViewDetails(asset._id)} className="button">
+              <button
+                onClick={() => handleViewDetails(asset._id)}
+                className="button"
+              >
                 View Details
               </button>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </div>

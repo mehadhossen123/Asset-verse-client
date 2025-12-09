@@ -2,15 +2,20 @@ import { useQuery } from "@tanstack/react-query";
 import React from "react";
 import { useNavigate, useParams } from "react-router";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import Loader from "../Components/Loading/Loader";
+import { motion } from "framer-motion";
+import useAuth from "../Hooks/useAuth";
+
 
 const AssetDetails = () => {
+  const{user}=useAuth()
   const axiosSecure = useAxiosSecure();
   const { id } = useParams();
   const navigate = useNavigate();
 
   const {
     data: singleData,
-    isLoading,
+isLoading,
     isError,
   } = useQuery({
     queryKey: ["assets", id],
@@ -22,11 +27,7 @@ const AssetDetails = () => {
 
   // Loading state
   if (isLoading) {
-    return (
-      <div className="flex justify-center items-center min-h-screen">
-        <p className="text-xl font-semibold text-gray-600">Loading...</p>
-      </div>
-    );
+    return <Loader></Loader>
   }
 
   // Error state
@@ -40,9 +41,33 @@ const AssetDetails = () => {
     );
   }
 
+  const handleProductRequest=(data)=>{
+    const assetInfo = {
+      assetId: data._id,
+      assetName: data.productName,
+      assetImage: data.productImage,
+      assetType: data.productType,
+      requesterName:user?.displayName,
+      requesterEmail:user?.email,
+      requestStatus:'pending',
+      note:''
+
+
+    };
+    console.log(assetInfo)
+
+  }
+
   return (
-    <div className="p-6 max-w-4xl mx-auto">
-        <h1 className="my-5 text-4xl text-center">See The Product Details</h1>
+    <div className="p-6 max-w-5xl h-[700px] mx-auto">
+      <motion.h1
+        initial={{ opacity: 0, y: -30 }}
+        animate={{ opacity: 1, y: 30 }}
+        transition={{ duration: 0.8, ease: "easeInOut" }}
+        className="my-5 text-4xl text-yellow-700 text-center font-bold"
+      >
+        See The Product Details
+      </motion.h1>
       {/* Go Back Button */}
       <button
         onClick={() => navigate(-1)}
@@ -51,10 +76,17 @@ const AssetDetails = () => {
         ← Go Back
       </button>
 
-      <div className="bg-white shadow-lg rounded-xl p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
+      <motion.div
+        initial={{ opacity: 0, x: -40 }}
+        animate={{ opacity: 1, x: 40 }}
+        transition={{ duration: 0.8, ease: "easeInOut" }}
+        className="bg-white shadow-lg rounded-xl p-6 grid grid-cols-1 md:grid-cols-2 gap-8"
+      >
         {/* Asset Image */}
         <div>
-          <img
+          <motion.img
+          animate={{y:[0 ,-2 ,0 ,2 ,0]}}
+          transition={{duration:0.5,repeat:Infinity,ease:"easeInOut"}}
             src={singleData?.productImage}
             alt={singleData?.productName}
             className="w-full h-64 object-cover rounded-lg shadow"
@@ -83,11 +115,14 @@ const AssetDetails = () => {
           </p>
 
           {/* Request Button */}
-          <button className="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg shadow-md transition">
+          <button
+            onClick={() => handleProductRequest(singleData)}
+            className="mt-6 w-full button text-white py-3 rounded-lg shadow-md transition"
+          >
             Request This Asset
           </button>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

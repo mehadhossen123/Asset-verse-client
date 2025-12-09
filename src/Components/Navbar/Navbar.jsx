@@ -7,7 +7,8 @@ import { CgProfile } from "react-icons/cg";
 import Swal from "sweetalert2";
 import { TbLogout2 } from "react-icons/tb";
 import { RxActivityLog } from "react-icons/rx";
-import useRole from "../../Hooks/useRole";
+import bgImage from '../../assets/A good day at work!.jpeg'
+
 
 
 
@@ -50,47 +51,51 @@ const Navbar = () => {
           className={({ isActive }) =>
             isActive
               ? "text-white bg-green-500 rounded-2xl font-bold py-1 px-4"
-              : ""
+              : " text-yellow-700 font-bold"
           }
         >
           Home
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/auth/manager-register"
-          className={({ isActive }) =>
-            isActive
-              ? "text-white bg-green-500 font-bold rounded-2xl py-1 px-4"
-              : ""
-          }
-        >
-          Join as HR Manager
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/auth/employee-register"
-          className={({ isActive }) =>
-            isActive
-              ? "text-white bg-green-500 font-bold rounded-2xl py-1 px-4"
-              : ""
-          }
-        >
-          Join as HR Employee
-        </NavLink>
-      </li>
+      {!user && (
+        <>
+          <li>
+            <NavLink
+              to="/auth/manager-register"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-white bg-green-500 font-bold rounded-2xl py-1 px-4"
+                  : "text-yellow-700 font-bold"
+              }
+            >
+              Join as HR Manager
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/auth/employee-register"
+              className={({ isActive }) =>
+                isActive
+                  ? "text-white bg-green-500 font-bold rounded-2xl py-1 px-4"
+                  : "text-yellow-700 font-bold"
+              }
+            >
+              Join as HR Employee
+            </NavLink>
+          </li>
+        </>
+      )}
     </>
   );
 
   return (
-    <div className="navbar bg-base-100 shadow-sm">
+    <div  className="navbar bg-black fixed z-10  w-full  max-w-7xl shadow-sm">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className=" lg:hidden">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5"
+              className="h-5 w-5 text-white"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -118,7 +123,12 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-end flex items-center gap-4">
-        {!user && <Link to={"/auth/login"}>Login</Link>}
+        {user? <Link className="text-yellow-700 font-bold"  onClick={handleLogout}>
+        logout</Link>:  (
+          <Link to={"/auth/login"}>
+            <p className="text-yellow-800 font-bold">Login</p>
+          </Link>
+        )}
 
         {/* Profile always visible */}
         <div className="relative">
@@ -146,7 +156,7 @@ const Navbar = () => {
                   </div>
                 </Link>
               </li>
-         
+
               <li>
                 <Link
                   to="/dashboard"
@@ -159,7 +169,7 @@ const Navbar = () => {
                   </div>
                 </Link>
               </li>
-            
+
               <li>
                 <button
                   onClick={handleLogout}
