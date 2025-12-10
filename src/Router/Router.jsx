@@ -15,6 +15,8 @@ import RequestAsset from "../Employee/RequestAsset";
 import EmployeeRoute from "./EmployeeRoute";
 import AssetDetails from "../Employee/AssetDetails";
 import RequestedAsset from "../Dashoard/RequestedAsset";
+import Error from "../Components/Error";
+
 
 
 
@@ -98,4 +100,10 @@ export const router = createBrowserRouter([
       }
     ],
   },
+  {
+    path:"/*",
+    element:<Error></Error>
+  }
+ 
+    
 ]);
