@@ -57,9 +57,9 @@ const ManagerRegister = () => {
       <div className="min-h-screen bg-black flex mt-20 items-center justify-center  py-10 px-4">
         <form
           onSubmit={handleSubmit(handleManagerRegister)}
-          className="w-full max-w-4xl text-white shadow-xl rounded-2xl p-8 space-y-6"
+          className="w-full max-w-4xl bg-white shadow-xl rounded-2xl p-8 space-y-6"
         >
-          <h2 className="text-4xl text-yellow-700 font-extrabold text-center text-gray-800">
+          <h2 className="text-4xl text-yellow-700 font-extrabold text-center ">
             Join as HR Manager
           </h2>
           <p className="text-center text-blue-400">

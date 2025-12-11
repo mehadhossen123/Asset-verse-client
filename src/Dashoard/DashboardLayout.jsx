@@ -132,6 +132,20 @@ const DashboardLayout = () => {
                 <>
                   <li>
                     <Link
+                      to={"/dashboard/my-asset"}
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="My asset"
+                    >
+                      {/* Home icon */}
+                      <MdWebAsset />
+
+                      <span className="is-drawer-close:hidden text-green-500 font-bold">
+                        My Asset
+                      </span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
                       to={"/dashboard/request-an-asset"}
                       className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
                       data-tip="Request an asset"
@@ -144,6 +158,7 @@ const DashboardLayout = () => {
                       </span>
                     </Link>
                   </li>
+                  
                 </>
               )}
 
