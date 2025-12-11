@@ -80,6 +80,32 @@ const RequestedAsset = () => {
      }
    });
  };
+ const handleDeleteRequest = (id) => {
+   Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+  
+          axiosSecure.delete(`/requests/${id}`).then((res) => {
+            console.log(res.data)
+            refetch()
+             Swal.fire({
+               title: "Deleted!",
+               text:`${res?.data?.message}`,
+               icon: "success",
+             });
+           
+          });
+         
+        }
+      });
+ };
 
     return (
       <div>
@@ -123,9 +149,11 @@ const RequestedAsset = () => {
                   </td>
                   <td className="text-center text-white">
                     {asset.requestStatus == "approved" ? (
-                      <p className="text-green-600 font-bold">{asset.requestStatus}</p>
+                      <p className="text-green-600 font-bold">
+                        {asset.requestStatus}
+                      </p>
                     ) : (
-                      <p >{asset.requestStatus}</p>
+                      <p>{asset.requestStatus}</p>
                     )}
                   </td>
                   <td className="text-center text-white">
@@ -135,7 +163,10 @@ const RequestedAsset = () => {
                     >
                       <FcApprove />
                     </button>
-                    <button className="px-6 py-1 cursor-pointer text-2xl bg-gradient-to-r from-red-500 to-rose-400 hover:from-rose-400 hover:to-red-600 text-white font-semibold rounded-lg shadow-md transition duration-300 ">
+                    <button
+                      onClick={() => handleDeleteRequest(asset._id)}
+                      className="px-6 py-1 cursor-pointer text-2xl bg-gradient-to-r from-red-500 to-rose-400 hover:from-rose-400 hover:to-red-600 text-white font-semibold rounded-lg shadow-md transition duration-300 "
+                    >
                       <ImCross />
                     </button>
                   </td>

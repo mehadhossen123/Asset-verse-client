@@ -63,8 +63,9 @@ const HrAssetList = () => {
 
   }
   const  handleEditProduct=async(data)=>{
-    console.log(assetId)
-    console.log(data)
+    modalRef.current.close();
+
+    
      const productImage = data.productImage[0];
     const formData = new FormData();
     formData.append("image", productImage);
@@ -73,18 +74,38 @@ const HrAssetList = () => {
 
     const product_image_url = await axios .post(image_api_url,formData);
     const productImageUrl= product_image_url.data.data.display_url;
-    console.log(productImageUrl)
+   
   
    const updatedInfo = {
+    
      productName: data.productName,
      productImage: productImageUrl,
      productType: data.productType,
      productQuantity: parseInt(data.productQuantity),
    };
    axiosSecure.patch(`/assets/${assetId}`,updatedInfo).then((res)=>{
-    reset()
+   
+    
+
     refetch()
-    console.log(res.data)
+    reset()
+    console.log(res?.data)
+     Swal.fire({
+                  position: "center",
+                  icon: "success",
+                  title:`${res?.data?.message}`,
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+   }).catch((error)=>{
+    console.log(error)
+     Swal.fire({
+       position: "center",
+       icon: "success",
+       title: `Internal server error`,
+       showConfirmButton: false,
+       timer: 1500,
+     });
    })
 
    

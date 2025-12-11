@@ -18,7 +18,7 @@ const Package = () => {
   return (
     <>
     <h1 className="text-white text-center text-4xl font-bold">Our All Packages </h1>
-      <div className="grid grid-cols-3">
+      <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-3">
         {pakData.map((data, i) => (
           <motion.div
             animate={{ y: [0, -30, 0, 30, 0] }}
