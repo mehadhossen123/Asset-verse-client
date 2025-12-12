@@ -12,15 +12,15 @@ const MyAsset = () => {
 
     const { user } = useAuth();
     const { data: myAssets = [] } = useQuery({
-      queryKey: ["requests", user?.email],
+      queryKey: ["requests", user?.email,search],
       queryFn: async () => {
         const res = await axiosSecure.get(
-          `/requests/asset?email=${user?.email}&requestStatus=approved&searchText${search}`
+          `/requests/asset?email=${user?.email}&requestStatus=approved&searchText=${search}`
         );
         return res.data.data;
       },
     });
-    console.log(search)
+
     return (
       <div className=" ">
         {/* Search box  */}
@@ -46,11 +46,9 @@ const MyAsset = () => {
                   required
                 />
               </label>
-              <div className="validator-hint hidden">
-                Enter valid email address
-              </div>
+              
             </div>
-            <button className=" bg-amber-600 join-item font-bold py-1 px-1">
+            <button className=" bg-amber-600 join-item cursor-pointer  font-bold py-1 px-1">
               Search
             </button>
           </div>
@@ -90,7 +88,7 @@ const MyAsset = () => {
             </thead>
             <tbody>
               {myAssets.map((asset, i) => (
-                <tr>
+                <tr key={i}>
                   <th>{i + 1}</th>
                   <td>
                     <div className="flex items-center gap-3">
