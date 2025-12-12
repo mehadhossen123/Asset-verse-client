@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import useAxios from "../Hooks/useAxios";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import { motion } from "framer-motion";
+motion
 
 const AddAsset = () => {
     const axiosSecure=useAxiosSecure()
@@ -46,8 +48,13 @@ const AddAsset = () => {
   };
 
   return (
-    <div>
-      <div className="w-full max-w-md mx-auto mt-8 p-5 bg-white shadow-md rounded-lg">
+   
+      <motion.div
+        initial={{ opacity: 0, x: -40 }}
+        animate={{ opacity: 1, x: 40 }}
+        transition={{ duration: 0.8, ease: "easeInOut" }}
+        className="w-full max-w-md mx-auto mt-8 p-5 bg-white shadow-md rounded-lg"
+      >
         <h2 className="text-2xl font-bold text-yellow-700 mb-5 text-center">
           Add New Product
         </h2>
@@ -139,8 +146,8 @@ const AddAsset = () => {
             Add Product
           </button>
         </form>
-      </div>
-    </div>
+      </motion.div>
+    
   );
 };
 

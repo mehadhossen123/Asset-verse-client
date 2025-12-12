@@ -17,6 +17,7 @@ import AssetDetails from "../Employee/AssetDetails";
 import RequestedAsset from "../Dashoard/RequestedAsset";
 import Error from "../Components/Error";
 import MyAsset from "../Employee/MyAsset";
+import MyEmployee from "../Manager/MyEmployee";
 
 
 
@@ -78,6 +79,14 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "/dashboard/my-employee",
+        element: (
+          <HrRoute>
+           <MyEmployee></MyEmployee>
+          </HrRoute>
+        ),
+      },
+      {
         path: "/dashboard/request-an-asset",
         element: (
           <EmployeeRoute>
@@ -97,7 +106,7 @@ export const router = createBrowserRouter([
         path: "/dashboard/my-asset",
         element: (
           <EmployeeRoute>
-          <MyAsset></MyAsset>
+            <MyAsset></MyAsset>
           </EmployeeRoute>
         ),
       },
