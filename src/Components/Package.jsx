@@ -16,8 +16,15 @@ const Package = () => {
   });
 
   return (
-    <>
-    <h1 className="text-white text-center lg:text-5xl text-3xl font-bold my-10">Our All Packages </h1>
+    <motion.section
+      initial={{ opacity: 0, y: 80 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.9, ease: "easeInOut" }}
+      viewport={{ once: false }}
+    >
+      <h1 className="text-white text-center lg:text-5xl text-3xl font-bold my-10">
+        Our All Packages{" "}
+      </h1>
       <div className="grid grid-cols-1 md:grid-cols-1 gap-5 lg:grid-cols-3">
         {pakData.map((data, i) => (
           <motion.div
@@ -59,7 +66,6 @@ const Package = () => {
               <ul className=" text-sm text-gray-700">
                 {data.features.map((feature, index) => (
                   <li key={index} className="flex items-start">
-                    
                     <TiTickOutline className="text-blue-600" />
 
                     <span className="flex-1">{feature}</span>
@@ -80,7 +86,7 @@ const Package = () => {
           </motion.div>
         ))}
       </div>
-    </>
+    </motion.section>
   );
 };
 

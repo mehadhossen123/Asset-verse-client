@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import {
   FaBoxOpen,
   FaUserShield,
@@ -6,6 +7,7 @@ import {
   FaTools,
   FaLock,
 } from "react-icons/fa";
+
 
 const Features = () => {
   const features = [
@@ -42,25 +44,29 @@ const Features = () => {
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <motion.section
+    initial={{opacity:0,y:80}}
+    whileInView={{opacity:1,y:0}}
+    transition={{duration:0.9,ease:"easeInOut"}}
+    viewport={{once:false}}
+    
+     className=" bg-slate-900 py-20">
       <div className="max-w-7xl mx-auto px-6">
         {/* Section Header */}
         <div className="text-center">
-          <h2 className="text-4xl font-bold text-gray-800">
-            Powerful Features
-          </h2>
-          <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
+          <h2 className="text-4xl font-bold text-white">Powerful Features</h2>
+          <p className="mt-4 text-yellow-700 max-w-2xl mx-auto">
             AssetVerse offers a comprehensive set of features to manage
             corporate assets efficiently and securely.
           </p>
         </div>
 
         {/* Features Grid */}
-        <div className="mt-14 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+        <div className="mt-14  grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
           {features.map((feature, i) => (
             <div
               key={i}
-              className="p-6 border rounded-2xl hover:shadow-lg transition"
+              className="p-6 border bg-white  rounded-2xl hover:shadow-lg transition"
             >
               <div className="text-3xl text-indigo-600 mb-4">
                 {feature.icon}
@@ -73,7 +79,7 @@ const Features = () => {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 
