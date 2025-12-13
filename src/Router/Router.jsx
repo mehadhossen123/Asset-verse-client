@@ -18,6 +18,8 @@ import RequestedAsset from "../Dashoard/RequestedAsset";
 import Error from "../Components/Error";
 import MyAsset from "../Employee/MyAsset";
 import MyEmployee from "../Manager/MyEmployee";
+import Package from "../Components/Package";
+import UpgradePackage from "../Manager/UpgradePackage";
 
 
 
@@ -79,10 +81,18 @@ export const router = createBrowserRouter([
         ),
       },
       {
+        path: "/dashboard/upgrade-package",
+        element: (
+          <HrRoute>
+           <UpgradePackage></UpgradePackage>
+          </HrRoute>
+        ),
+      },
+      {
         path: "/dashboard/my-employee",
         element: (
           <HrRoute>
-           <MyEmployee></MyEmployee>
+            <MyEmployee></MyEmployee>
           </HrRoute>
         ),
       },
