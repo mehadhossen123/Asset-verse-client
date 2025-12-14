@@ -10,12 +10,19 @@ const MyTeam = () => {
     const { data: uniqueCompany = [] } = useQuery({
       queryKey: ["uniqueCompany"],
       queryFn: async () => {
-        const res = await axiosSecure.get(`/assignedAssets/uniqueCompany`);
+        const res = await axiosSecure.get(`/affiliations/uniqueCompany`);
         return res.data.data;
       },
     });
-  console.log(selectCompany)
-
+  const{ data:teams=[]}=useQuery({
+    queryKey:["teams",selectCompany],
+    enabled:!!selectCompany,
+    queryFn:async ()=>{
+        const res = await axiosSecure.get(`affiliations?companyName=${selectCompany}`);
+        return res.data.data;
+    }
+  })
+  console.log(teams)
     return (
       <div>
         <h1 className="text-5xl text-center text-white font-bold my-5 ">
@@ -34,6 +41,8 @@ const MyTeam = () => {
           
           </fieldset>
         </div>
+        {/* Table  of employee  */}
+
       </div>
     );
 };
