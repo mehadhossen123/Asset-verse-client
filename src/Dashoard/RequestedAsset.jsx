@@ -72,7 +72,7 @@ const RequestedAsset = () => {
               cancelButtonText:"Go to payment"
             }).then((result) => {
             if (result.dismiss === Swal.DismissReason.cancel) {
-             window.location.href = "/payment";
+             window.location.href = "/dashboard/upgrade-package";
   }
 });
          })

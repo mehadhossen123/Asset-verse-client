@@ -17,14 +17,15 @@ const Package = () => {
 
   return (
     <motion.section
-      initial={{ opacity: 0, y: 80 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, x: 80 }}
+      whileInView={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.9, ease: "easeInOut" }}
       viewport={{ once: false }}
     >
-      <h1 className="text-white text-center lg:text-5xl text-3xl font-bold my-10">
+      <h1 className="text-white text-center lg:text-5xl text-3xl font-bold my-5">
         Our All Packages{" "}
       </h1>
+      <p className="text-yellow-700  text-center   mb-5">Upgrade package and manage your asset with multiple employee </p>
       <div className="grid grid-cols-1 md:grid-cols-1 gap-5 lg:grid-cols-3">
         {pakData.map((data, i) => (
           <motion.div

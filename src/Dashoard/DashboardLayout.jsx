@@ -4,7 +4,7 @@ import useRole from "../Hooks/useRole";
 import { MdWebAsset } from "react-icons/md";
 import { FaListOl } from "react-icons/fa";
 import { VscGitPullRequestGoToChanges } from "react-icons/vsc";
-import { RiPassPendingLine } from "react-icons/ri";
+import { RiPassPendingLine, RiTeamLine } from "react-icons/ri";
 import { FaUserGroup } from "react-icons/fa6";
 import { GiArmorUpgrade } from "react-icons/gi";
 
@@ -184,6 +184,20 @@ const DashboardLayout = () => {
 
                       <span className="is-drawer-close:hidden text-green-500 font-bold">
                         Request an asset
+                      </span>
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to={"/dashboard/my-team"}
+                      className="is-drawer-close:tooltip is-drawer-close:tooltip-right"
+                      data-tip="My team "
+                    >
+                      {/* Home icon */}
+                      <RiTeamLine />
+
+                      <span className="is-drawer-close:hidden text-green-500 font-bold">
+                        My Team
                       </span>
                     </Link>
                   </li>

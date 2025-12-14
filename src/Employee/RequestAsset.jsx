@@ -87,6 +87,9 @@ const RequestAsset = () => {
               <p className="text-gray-400 text-sm mt-1">
                 Posted on: {new Date(asset.dateAdded).toLocaleDateString()}
               </p>
+              <p className="text-gray-400 text-sm mt-1">
+               Company name : {asset.companyName}
+              </p>
 
               {/* View Details Button */}
               <button

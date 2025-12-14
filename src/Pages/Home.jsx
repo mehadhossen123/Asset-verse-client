@@ -6,6 +6,8 @@ import Banner from '../Components/Banner';
 import { motion } from 'framer-motion';
 import About from '../Components/About';
 import Features from '../Components/Features ';
+import Testmonials from '../Components/Testmonials';
+import ExtraSection from '../Components/ExtraSection';
 motion
 
 const Home = () => {
@@ -36,6 +38,10 @@ const Home = () => {
         <About></About>
         <Package></Package>
         <Features></Features>
+      
+       
+        <Testmonials></Testmonials>
+        <ExtraSection></ExtraSection>
       </div>
     );
 };

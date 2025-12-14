@@ -20,6 +20,7 @@ import MyAsset from "../Employee/MyAsset";
 import MyEmployee from "../Manager/MyEmployee";
 import Package from "../Components/Package";
 import UpgradePackage from "../Manager/UpgradePackage";
+import MyTeam from "../Employee/MyTeam";
 
 
 
@@ -101,6 +102,14 @@ export const router = createBrowserRouter([
         element: (
           <EmployeeRoute>
             <RequestAsset></RequestAsset>
+          </EmployeeRoute>
+        ),
+      },
+      {
+        path: "/dashboard/my-team",
+        element: (
+          <EmployeeRoute>
+            <MyTeam></MyTeam>
           </EmployeeRoute>
         ),
       },
