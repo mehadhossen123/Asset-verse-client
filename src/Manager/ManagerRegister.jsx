@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../Hooks/useAuth";
 import useAxios from "../Hooks/useAxios";
 import Swal from "sweetalert2";
 import PageWarper from "../CustomItem/PageWarper";
+import { IoEyeOutline } from "react-icons/io5";
 
 const ManagerRegister = () => {
   const { userRegister, updateUserProfile } = useAuth();
   const axios = useAxios();
   const navigate=useNavigate()
+  const [show,setShow]=useState(false)
 
   const {
     reset,
@@ -108,23 +110,47 @@ const ManagerRegister = () => {
             </div>
 
             {/* Password */}
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text font-medium text-gray-700">
-                  Password
-                </span>
-              </label>
-              <input
-                {...register("managerPassword", { required: true })}
-                type="password"
-                placeholder="Min 6 characters"
-                className="input input-bordered w-full"
-              />
-              {errors.managerPassword && (
-                <span className="text-red-500 text-sm">
-                  This field is required
-                </span>
-              )}
+            <div className="">
+              {/* Password field  */}
+              <div className="form-control relative">
+                <label className="label">
+                  <span className="label-text font-medium text-gray-700">
+                    Password
+                  </span>
+                </label>
+                <input
+                  {...register("managerPassword", {
+                    required: true,
+                    minLength: 8,
+                    pattern: {
+                      value:
+                        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/,
+                      message:
+                        "Password must include uppercase, lowercase, number & special character",
+                    },
+                  })}
+                  type={`${show===true? "text":"password"}`}
+                  placeholder="Min 6 characters"
+                  className="input input-bordered w-full"
+                />
+                <IoEyeOutline onClick={()=>setShow(!show)} className="absolute right-3 mt-3 top-1/2 -translate-y-1/2 text-xl cursor-pointer text-gray-500" />
+                {errors.managerPassword && (
+                  <span className="text-red-500 text-sm">
+                    This field is required
+                  </span>
+                )}
+
+                {errors.managerPassword?.type === "pattern" && (
+                  <p className="text-red-600 mt-1">
+                    {errors?.managerPassword?.message}
+                  </p>
+                )}
+                {errors.managerPassword?.type === "minLength" && (
+                  <p className="text-red-600 mt-1">
+                    Password must be at least 8 character
+                  </p>
+                )}
+              </div>
             </div>
 
             {/* Company Name */}

@@ -4,6 +4,7 @@ import {
   createUserWithEmailAndPassword,
 
   onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
 
   signOut,
@@ -26,24 +27,23 @@ const AuthProvider = ({ children }) => {
   };
 
   const userSignIn = (email, password) => {
-    setLoading(true)
-    
+    setLoading(true);
+
     return signInWithEmailAndPassword(auth, email, password);
   };
-
- 
 
   const userLogout = () => {
     return signOut(auth);
   };
 
+  // update profile info
   const updateUserProfile = (profile) => {
     return updateProfile(auth.currentUser, profile);
   };
-//   //   Reset password
-//   const resetPassword = (email) => {
-//     return sendPasswordResetEmail(auth, email);
-//   };
+    //   Reset password
+    const resetPassword = (email) => {
+      return sendPasswordResetEmail(auth, email);
+    };
 
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
@@ -59,12 +59,11 @@ const AuthProvider = ({ children }) => {
     userRegister,
     userSignIn,
     updateUserProfile,
+    resetPassword,
 
     user,
     loading,
     userLogout,
-   
-    
   };
   return <AuthContext value={userInfo}>{children}</AuthContext>;
 };

@@ -21,6 +21,9 @@ import MyEmployee from "../Manager/MyEmployee";
 import Package from "../Components/Package";
 import UpgradePackage from "../Manager/UpgradePackage";
 import MyTeam from "../Employee/MyTeam";
+import UpdatedProfile from "../Pages/UpdatedProfile";
+import ForgetPassword from "../Auth/ForgetPassword";
+import Payment from "../Dashoard/Payment/Payment";
 
 
 
@@ -56,8 +59,16 @@ export const router = createBrowserRouter([
         element: <Login></Login>,
       },
       {
+        path: "/auth/change-password",
+        element:<ForgetPassword></ForgetPassword>,
+      },
+      {
         path: "/auth/profile",
         element: <MyProfile></MyProfile>,
+      },
+      {
+        path: "/auth/update",
+        element: <UpdatedProfile></UpdatedProfile>,
       },
     ],
   },
@@ -119,6 +130,12 @@ export const router = createBrowserRouter([
           <EmployeeRoute>
             <AssetDetails></AssetDetails>
           </EmployeeRoute>
+        ),
+      },
+      {
+        path: "/dashboard/payment/:id",
+        element: (
+          <Payment></Payment>
         ),
       },
       {

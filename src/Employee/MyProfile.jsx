@@ -17,7 +17,6 @@ const MyProfile = () => {
 
   return (
     <div className="bg-black min-h-screen  mt-24">
-     
       <div
         // style={{ backgroundImage: `url(${img})` }}
         className="flex justify-center p-5"
@@ -66,7 +65,7 @@ const MyProfile = () => {
 
           <div className="mt-8 flex justify-center">
             <Link
-              to={"/auth/profile"}
+              to={"/auth/update"}
               className="px-6 py-2 bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-cyan-400 hover:to-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-300"
             >
               Edit Profile

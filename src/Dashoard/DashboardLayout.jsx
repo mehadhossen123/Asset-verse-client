@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, Outlet } from "react-router";
 import useRole from "../Hooks/useRole";
 import { MdWebAsset } from "react-icons/md";
@@ -10,6 +10,9 @@ import { GiArmorUpgrade } from "react-icons/gi";
 
 const DashboardLayout = () => {
   const { userRole } = useRole();
+  useEffect(()=>{
+    window.scrollTo({top:0,behavior:"smooth"})
+  },[])
   return (
     <div className="bg-black">
       <div className="drawer lg:drawer-open">

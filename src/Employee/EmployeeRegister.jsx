@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import useAuth from '../Hooks/useAuth';
 import useAxios from '../Hooks/useAxios';
 import Swal from 'sweetalert2';
 import PageWarper from '../CustomItem/PageWarper';
 import { useNavigate } from 'react-router';
+import { IoEyeOutline } from "react-icons/io5";
 
 const EmployeeRegister = () => {
     const { userRegister, updateUserProfile } = useAuth();
+    const [show,setShow]=useState(false)
     const axios=useAxios()
     const navigate=useNavigate()
      const {
@@ -16,6 +18,10 @@ const EmployeeRegister = () => {
         handleSubmit,
         formState: { errors },
       } = useForm();
+
+useEffect(()=>{
+  window.scrollTo({top:0,behavior:"smooth"})
+},[])
 
       const handleEmployeeRegister=async(data)=>{
          try {
@@ -46,6 +52,12 @@ const EmployeeRegister = () => {
               });
             } catch (error) {
               console.log(error);
+               Swal.fire({
+                 icon: "success",
+                 title: `${error.message}`,
+                 text: "You can now login as Employee ",
+                 confirmButtonText: "OK",
+               });
             }
 
 
@@ -62,7 +74,7 @@ const EmployeeRegister = () => {
               Join as Employee
             </h2>
             <p className="text-center text-blue-400">
-              Create your account to get  your needed asset
+              Create your account to get your needed asset
             </p>
 
             {/* Full Name */}
@@ -119,20 +131,43 @@ const EmployeeRegister = () => {
             </div>
 
             {/* Password */}
-            <div className="form-control">
+            <div className="form-control relative">
               <label className="label">
                 <span className="label-text font-medium">Password</span>
               </label>
               <input
-                {...register("employeePassword", { required: true })}
-                type="password"
-                placeholder="Min 6 characters"
+                {...register("employeePassword", {
+                  required: true,
+                  minLength: 8,
+                  pattern: {
+                    value:
+                      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&]).{8,}$/,
+                    message:
+                      "Password must include uppercase, lowercase, number & special character",
+                  },
+                })}
+                type={`${show === true ? "text" : "password"}`}
+                placeholder="Enter your password "
                 className="input input-bordered w-full"
               />
-              {errors.employeePassword && (
+              <IoEyeOutline
+                onClick={() => setShow(!show)}
+                className="absolute right-3 mt-3 top-1/2 -translate-y-1/2 text-xl cursor-pointer text-gray-500"
+              />
+              {errors.employeePassword?.type === "required" && (
                 <span className="text-red-500 text-sm">
                   This field is required
                 </span>
+              )}
+              {errors.employeePassword?.type === "pattern" && (
+                <p className="text-red-600 mt-1">
+                  {errors?.employeePassword?.message}
+                </p>
+              )}
+              {errors.employeePassword?.type === "minLength" && (
+                <p className="text-red-600 mt-1">
+                  Password must be at least 8 character
+                </p>
               )}
             </div>
 

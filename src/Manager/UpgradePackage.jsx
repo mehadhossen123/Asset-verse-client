@@ -3,6 +3,7 @@ import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { TiTickOutline } from "react-icons/ti";
+import { Link } from "react-router";
 
 const UpgradePackage = () => {
   const axiosSecure = useAxiosSecure();
@@ -92,12 +93,16 @@ const UpgradePackage = () => {
                   </li>
                 ))}
               </ul>
-
             </div>
 
             {/* Bottom Choose Button */}
             <div className="p-4">
-             <button className="button w-full text-white">Upgrade Now</button>
+              <Link
+                to={`/dashboard/payment/${data._id}`}
+                className="button w-full text-white"
+              >
+                Upgrade Now
+              </Link>
             </div>
           </motion.div>
         ))}

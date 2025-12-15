@@ -93,7 +93,7 @@ const Navbar = () => {
                   : "text-yellow-700 font-bold"
               }
             >
-              Join as HR Employee
+              Join as Employee
             </NavLink>
           </li>
         </>
