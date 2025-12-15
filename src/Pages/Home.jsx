@@ -12,7 +12,7 @@ motion
 
 const Home = () => {
     const {user}=useAuth()
-    console.log(user)
+   
     return (
       <div className=" bg-black">
         <div className='flex flex-col justify-center items-center pb-10 md:pb-5   pt-24'>

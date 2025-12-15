@@ -24,6 +24,8 @@ import MyTeam from "../Employee/MyTeam";
 import UpdatedProfile from "../Pages/UpdatedProfile";
 import ForgetPassword from "../Auth/ForgetPassword";
 import Payment from "../Dashoard/Payment/Payment";
+import PaymentCancelled from "../Payment/PaymentCancelled";
+import PaymentSuccess from "../Payment/PaymentSuccess";
 
 
 
@@ -60,7 +62,7 @@ export const router = createBrowserRouter([
       },
       {
         path: "/auth/change-password",
-        element:<ForgetPassword></ForgetPassword>,
+        element: <ForgetPassword></ForgetPassword>,
       },
       {
         path: "/auth/profile",
@@ -96,7 +98,7 @@ export const router = createBrowserRouter([
         path: "/dashboard/upgrade-package",
         element: (
           <HrRoute>
-           <UpgradePackage></UpgradePackage>
+            <UpgradePackage></UpgradePackage>
           </HrRoute>
         ),
       },
@@ -134,9 +136,15 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard/payment/:id",
-        element: (
-          <Payment></Payment>
-        ),
+        element: <Payment></Payment>,
+      },
+      {
+        path: "/dashboard/payment-canceled",
+        element: <PaymentCancelled></PaymentCancelled>,
+      },
+      {
+        path: "dashboard/payment-success",
+        element: <PaymentSuccess></PaymentSuccess>,
       },
       {
         path: "/dashboard/my-asset",
