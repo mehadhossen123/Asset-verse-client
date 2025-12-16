@@ -8,6 +8,7 @@ import { motion } from 'framer-motion';
 import Swal from 'sweetalert2';
 import { useForm } from 'react-hook-form';
 import useAxios from '../Hooks/useAxios';
+import PageWarper from '../CustomItem/PageWarper';
 
 
 const HrAssetList = () => {
@@ -112,190 +113,194 @@ const HrAssetList = () => {
   }
 
   return (
-    <>
-      {/* Edit modal si here  */}
-      {/* Open the modal using document.getElementById('ID').showModal() method */}
+    <PageWarper>
+      <>
+        {/* Edit modal si here  */}
+        {/* Open the modal using document.getElementById('ID').showModal() method */}
 
-      <dialog ref={modalRef} className="modal modal-bottom sm:modal-middle">
-        {/* Modal body is here  */}
-        <div className="modal-box">
-          <h3 className="font-bold text-yellow-700 text-center text-3xl">
-            Edit Your Asset
-          </h3>
-          {/* Edit part  */}
-          <form
-            onSubmit={handleSubmit(handleEditProduct)}
-            className="space-y-3"
-          >
-            {/* Product Name */}
-            <div>
-              <label className="text-sm font-medium">Product Name</label>
-              <input
-                {...register("productName")}
-                type="text"
-                className="w-full p-2 border rounded-md mt-1 text-sm"
-                placeholder="Enter product name"
-              />
-            </div>
+        <dialog ref={modalRef} className="modal modal-bottom sm:modal-middle">
+          {/* Modal body is here  */}
+          <div className="modal-box">
+            <h3 className="font-bold text-yellow-700 text-center text-3xl">
+              Edit Your Asset
+            </h3>
+            {/* Edit part  */}
+            <form
+              onSubmit={handleSubmit(handleEditProduct)}
+              className="space-y-3"
+            >
+              {/* Product Name */}
+              <div>
+                <label className="text-sm font-medium">Product Name</label>
+                <input
+                  {...register("productName")}
+                  type="text"
+                  className="w-full p-2 border rounded-md mt-1 text-sm"
+                  placeholder="Enter product name"
+                />
+              </div>
 
-            {/* Product Image */}
-            <div>
-              <label className="text-sm font-medium mb-1">Product Image</label>
-              <input
-                {...register("productImage")}
-                type="file"
-                className="file-input file-input-primary w-full"
-              />
-            </div>
+              {/* Product Image */}
+              <div>
+                <label className="text-sm font-medium mb-1">
+                  Product Image
+                </label>
+                <input
+                  {...register("productImage")}
+                  type="file"
+                  className="file-input file-input-primary w-full"
+                />
+              </div>
 
-            {/* Product Type */}
-            <div>
-              <label className="text-sm font-medium">Product Type</label>
-              <select
-                {...register("productType")}
-                name="productType"
-                className="w-full p-2 border rounded-md mt-1 text-sm"
-              >
-                <option value="">Select Type</option>
-                <option value="Returnable">Returnable</option>
-                <option value="Non-returnable">Non-returnable</option>
-              </select>
-            </div>
+              {/* Product Type */}
+              <div>
+                <label className="text-sm font-medium">Product Type</label>
+                <select
+                  {...register("productType")}
+                  name="productType"
+                  className="w-full p-2 border rounded-md mt-1 text-sm"
+                >
+                  <option value="">Select Type</option>
+                  <option value="Returnable">Returnable</option>
+                  <option value="Non-returnable">Non-returnable</option>
+                </select>
+              </div>
 
-            {/* Product Quantity */}
-            <div>
-              <label className="text-sm font-medium">Product Quantity</label>
-              <input
-                {...register("productQuantity")}
-                type="number"
-                className="w-full p-2 border rounded-md mt-1 text-sm"
-                placeholder="Enter quantity"
-              />
-            </div>
+              {/* Product Quantity */}
+              <div>
+                <label className="text-sm font-medium">Product Quantity</label>
+                <input
+                  {...register("productQuantity")}
+                  type="number"
+                  className="w-full p-2 border rounded-md mt-1 text-sm"
+                  placeholder="Enter quantity"
+                />
+              </div>
 
-            <button type="submit" className="button w-full">
-              Update
-            </button>
-          </form>
-
-          <div className="modal-action">
-            <form method="dialog">
-              {/* if there is a button in form, it will close the modal */}
-              <button className="btn">Close</button>
+              <button type="submit" className="button w-full">
+                Update
+              </button>
             </form>
+
+            <div className="modal-action">
+              <form method="dialog">
+                {/* if there is a button in form, it will close the modal */}
+                <button className="btn">Close</button>
+              </form>
+            </div>
           </div>
-        </div>
-      </dialog>
-      <div>
-        {hrAssets.length === 0 ? (
-          <div>
+        </dialog>
+        <div>
+          {hrAssets.length === 0 ? (
+            <div>
+              <motion.h1
+                initial={{ opacity: 0, y: -40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                className="text-5xl text-center my-10 font-bold text-white"
+              >
+                You Have No Asset{" "}
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4, duration: 0.8 }}
+                className="text-lg mt-4 text-yellow-700 text-center"
+              >
+                Please post an asset{" "}
+              </motion.p>
+            </div>
+          ) : (
             <motion.h1
               initial={{ opacity: 0, y: -40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="text-5xl text-center my-10 font-bold text-white"
             >
-              You Have No Asset{" "}
+              Your Total Posted Asset{" "}
             </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-              className="text-lg mt-4 text-yellow-700 text-center"
-            >
-              Please post an asset{" "}
-            </motion.p>
-          </div>
-        ) : (
-          <motion.h1
-            initial={{ opacity: 0, y: -40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="text-5xl text-center my-10 font-bold text-white"
-          >
-            Your Total Posted Asset{" "}
-          </motion.h1>
-        )}
+          )}
 
-        <div className="overflow-x-auto">
-          <table className="table">
-            {/* head */}
-            <thead>
-              <tr>
-                <th className="text-yellow-700 font-bold text-center">#</th>
-                <th className="text-yellow-700 font-bold text-center mr-5">
-                  {" "}
-                  All posted Product{" "}
-                </th>
-                <th className="text-yellow-700 font-bold text-center">
-                  Product Type
-                </th>
-                <th className="text-yellow-700 font-bold text-center">
-                  Product Quantity
-                </th>
-                <th className="text-yellow-700 font-bold text-center">
-                  Post date{" "}
-                </th>
-                <th className="text-yellow-700 font-bold text-center">
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {/* row 1 */}
-              {hrAssets.map((asset, i) => (
-                <tr key={i}>
-                  <td className="text-center text-white"> {i + 1}</td>
-
-                  <td className="">
-                    <div className="flex items-center F gap-3">
-                      <div className="avatar">
-                        <div className="mask mask-squircle text-white h-12 w-12">
-                          <img
-                            src={asset.productImage}
-                            alt="Avatar Tailwind CSS Component"
-                          />
-                        </div>
-                      </div>
-                      <div>
-                        <div className="font-bold text-white">
-                          {asset.productName}
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                  <td className="text-center text-white">
-                    {asset.productType}
-                  </td>
-                  <td className="text-center text-white">
-                    <br />
-                    {asset.productQuantity}
-                  </td>
-                  <td className="text-center text-white">
+          <div className="overflow-x-auto">
+            <table className="table">
+              {/* head */}
+              <thead>
+                <tr>
+                  <th className="text-yellow-700 font-bold text-center">#</th>
+                  <th className="text-yellow-700 font-bold text-center mr-5">
                     {" "}
-                    {new Date(asset.dateAdded).toLocaleDateString()}
-                  </td>
-                  <td className="text-center text-white">
-                    <button
-                      onClick={() => handleOpenModal(asset._id)}
-                      className="px-6 py-1 text-2xl cursor-pointer mr-4 bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-cyan-400 hover:to-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-300"
-                    >
-                      <FaRegEdit />
-                    </button>
-                    <button
-                      onClick={() => handleDeleteAsset(asset._id)}
-                      className="px-6 py-1 cursor-pointer text-2xl bg-gradient-to-r from-red-500 to-rose-400 hover:from-rose-400 hover:to-red-600 text-white font-semibold rounded-lg shadow-md transition duration-300 "
-                    >
-                      <MdDeleteOutline />
-                    </button>
-                  </td>
+                    All posted Product{" "}
+                  </th>
+                  <th className="text-yellow-700 font-bold text-center">
+                    Product Type
+                  </th>
+                  <th className="text-yellow-700 font-bold text-center">
+                    Product Quantity
+                  </th>
+                  <th className="text-yellow-700 font-bold text-center">
+                    Post date{" "}
+                  </th>
+                  <th className="text-yellow-700 font-bold text-center">
+                    Actions
+                  </th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {/* row 1 */}
+                {hrAssets.map((asset, i) => (
+                  <tr key={i}>
+                    <td className="text-center text-white"> {i + 1}</td>
+
+                    <td className="">
+                      <div className="flex items-center F gap-3">
+                        <div className="avatar">
+                          <div className="mask mask-squircle text-white h-12 w-12">
+                            <img
+                              src={asset.productImage}
+                              alt="Avatar Tailwind CSS Component"
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <div className="font-bold text-white">
+                            {asset.productName}
+                          </div>
+                        </div>
+                      </div>
+                    </td>
+                    <td className="text-center text-white">
+                      {asset.productType}
+                    </td>
+                    <td className="text-center text-white">
+                      <br />
+                      {asset.productQuantity}
+                    </td>
+                    <td className="text-center text-white">
+                      {" "}
+                      {new Date(asset.dateAdded).toLocaleDateString()}
+                    </td>
+                    <td className="text-center text-white">
+                      <button
+                        onClick={() => handleOpenModal(asset._id)}
+                        className="px-6 py-1 text-2xl cursor-pointer mr-4 bg-gradient-to-r from-blue-500 to-cyan-400 hover:from-cyan-400 hover:to-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 transition duration-300"
+                      >
+                        <FaRegEdit />
+                      </button>
+                      <button
+                        onClick={() => handleDeleteAsset(asset._id)}
+                        className="px-6 py-1 cursor-pointer text-2xl bg-gradient-to-r from-red-500 to-rose-400 hover:from-rose-400 hover:to-red-600 text-white font-semibold rounded-lg shadow-md transition duration-300 "
+                      >
+                        <MdDeleteOutline />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
-    </>
+      </>
+    </PageWarper>
   );
 };
 

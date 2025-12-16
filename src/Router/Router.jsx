@@ -27,6 +27,7 @@ import Payment from "../Dashoard/Payment/Payment";
 import PaymentCancelled from "../Payment/PaymentCancelled";
 import PaymentSuccess from "../Payment/PaymentSuccess";
 import PaymentHistory from "../Manager/PaymentHistory";
+import ManagerHome from "../Manager/ManagerHome";
 
 
 
@@ -79,6 +80,14 @@ export const router = createBrowserRouter([
     path: "/dashboard",
     element: <DashboardLayout></DashboardLayout>,
     children: [
+      {
+        index: true,
+        element: (
+          <HrRoute>
+            <ManagerHome></ManagerHome>
+          </HrRoute>
+        ),
+      },
       {
         path: "/dashboard/add-asset",
         element: (
@@ -141,9 +150,11 @@ export const router = createBrowserRouter([
       },
       {
         path: "/dashboard/payment-history",
-        element: <HrRoute>
-        <PaymentHistory></PaymentHistory>
-        </HrRoute>,
+        element: (
+          <HrRoute>
+            <PaymentHistory></PaymentHistory>
+          </HrRoute>
+        ),
       },
       {
         path: "/dashboard/payment-canceled",
