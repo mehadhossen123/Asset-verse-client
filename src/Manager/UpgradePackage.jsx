@@ -4,17 +4,41 @@ import { useQuery } from "@tanstack/react-query";
 import { motion } from "framer-motion";
 import { TiTickOutline } from "react-icons/ti";
 import { Link } from "react-router";
+import useAuth from "../Hooks/useAuth";
+import Loader from "../Components/Loading/Loader";
 
 const UpgradePackage = () => {
   const axiosSecure = useAxiosSecure();
+  const {user}=useAuth()
 
-  const { data: pakData = [] } = useQuery({
+  const { data: pakData = [],isLoading } = useQuery({
     queryKey: ["package"],
     queryFn: async () => {
       const res = await axiosSecure.get("/packages");
       return res.data.data;
     },
   });
+  if(isLoading){
+    return <Loader></Loader>
+  }
+
+
+  
+    const handlePayment=async(packageData)=>{
+        const paymentInfo={
+            packageName:packageData.name,
+            packageId:packageData._id,
+            hrEmail:user?.email,
+            price:packageData.price,
+            
+        }
+        const res = await axiosSecure.post(
+          "/create-checkout-session",
+          paymentInfo
+        );
+       window.location.href=res.data.url;
+
+    }
 
   return (
     <>
@@ -97,12 +121,12 @@ const UpgradePackage = () => {
 
             {/* Bottom Choose Button */}
             <div className="p-4">
-              <Link
-                to={`/dashboard/payment/${data._id}`}
+              <button
+                onClick={() => handlePayment(data)}
                 className="button w-full text-white"
               >
                 Upgrade Now
-              </Link>
+              </button>
             </div>
           </motion.div>
         ))}

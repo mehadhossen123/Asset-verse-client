@@ -23,18 +23,18 @@ const Payment = () => {
     }
 
 
-    const handlePayment=async()=>{
-        const paymentInfo={
-            packageName:packageData.name,
-            packageId:packageData._id,
-            hrEmail:user?.email,
-            price:packageData.price,
+    // const handlePayment=async()=>{
+    //     const paymentInfo={
+    //         packageName:packageData.name,
+    //         packageId:packageData._id,
+    //         hrEmail:user?.email,
+    //         price:packageData.price,
             
-        }
-        const res=await useAxios.post('/create-checkout-session',paymentInfo)
-       window.location.href=res.data.url;
+    //     }
+    //     const res=await useAxios.post('/create-checkout-session',paymentInfo)
+    //    window.location.href=res.data.url;
 
-    }
+    // }
 
     return (
       <div>

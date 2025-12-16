@@ -32,7 +32,7 @@ const Package = () => {
             animate={{ y: [0, -30, 0, 30, 0] }}
             transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
             key={i}
-            class="w-full max-w-sm mx-auto  bg-white rounded-xl shadow-2xl border-indigo-600 overflow-hidden transform hover:scale-[1.02] transition duration-300 ease-in-out border-2  
+            className="w-full max-w-sm mx-auto  bg-white rounded-xl shadow-2xl border-indigo-600 overflow-hidden transform hover:scale-[1.02] transition duration-300 ease-in-out border-2  
     "
           >
             <div

@@ -26,6 +26,7 @@ import ForgetPassword from "../Auth/ForgetPassword";
 import Payment from "../Dashoard/Payment/Payment";
 import PaymentCancelled from "../Payment/PaymentCancelled";
 import PaymentSuccess from "../Payment/PaymentSuccess";
+import PaymentHistory from "../Manager/PaymentHistory";
 
 
 
@@ -139,11 +140,17 @@ export const router = createBrowserRouter([
         element: <Payment></Payment>,
       },
       {
+        path: "/dashboard/payment-history",
+        element: <HrRoute>
+        <PaymentHistory></PaymentHistory>
+        </HrRoute>,
+      },
+      {
         path: "/dashboard/payment-canceled",
         element: <PaymentCancelled></PaymentCancelled>,
       },
       {
-        path: "dashboard/payment-success",
+        path: "/dashboard/payment-success",
         element: <PaymentSuccess></PaymentSuccess>,
       },
       {
