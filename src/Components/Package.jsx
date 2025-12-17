@@ -3,17 +3,21 @@ import React from "react";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
 import { TiTickOutline } from "react-icons/ti";
 import { motion } from "framer-motion";
+import Loader from "./Loading/Loader";
 
 
 const Package = () => {
   const useAxios = useAxiosSecure();
-  const { data: pakData = [] } = useQuery({
+  const { data: pakData = [] ,isLoading} = useQuery({
     queryKey: ["package"],
     queryFn: async () => {
       const res = await useAxios.get("/packages");
       return res.data.data;
     },
   });
+  if(isLoading){
+    return<Loader></Loader>
+  }
 
   return (
     <motion.section

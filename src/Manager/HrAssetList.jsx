@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 import { useForm } from 'react-hook-form';
 import useAxios from '../Hooks/useAxios';
 import PageWarper from '../CustomItem/PageWarper';
+import Loader from '../Components/Loading/Loader';
 
 
 const HrAssetList = () => {
@@ -22,13 +23,16 @@ const HrAssetList = () => {
   
   const { user } = useAuth();
   const axiosSecure=useAxiosSecure()
-  const { data: hrAssets = [] ,refetch} = useQuery({
+  const { data: hrAssets = [] ,refetch,isLoading} = useQuery({
     queryKey: ["assets", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`/assets?email=${user?.email}`);
       return res.data.data;
     },
   });
+  if(isLoading){
+    return <Loader></Loader>
+  }
 
   //handleDeleteAsset
   const handleDeleteAsset=(id)=>{

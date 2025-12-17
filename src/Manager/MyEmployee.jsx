@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { MdDeleteOutline, MdOutlineWebAsset } from "react-icons/md";
 import Swal from "sweetalert2";
 import PageWarper from "../CustomItem/PageWarper";
+import Loader from "../Components/Loading/Loader";
 motion;
 
 const MyEmployee = () => {
@@ -13,7 +14,7 @@ const MyEmployee = () => {
   const [search, setSearch] = useState("");
 
   const { user } = useAuth();
-  const { data: myEmployee = [], refetch } = useQuery({
+  const { data: myEmployee = [], refetch,isLoading } = useQuery({
     queryKey: ["affiliations", user?.email, search],
     queryFn: async () => {
       const res = await axiosSecure.get(
@@ -22,6 +23,9 @@ const MyEmployee = () => {
       return res?.data?.data;
     },
   });
+  if(isLoading){
+    return <Loader></Loader>
+  }
 
   const handleDeleteEmployee = (id) => {
     Swal.fire({
