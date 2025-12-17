@@ -28,6 +28,7 @@ import PaymentCancelled from "../Payment/PaymentCancelled";
 import PaymentSuccess from "../Payment/PaymentSuccess";
 import PaymentHistory from "../Manager/PaymentHistory";
 import ManagerHome from "../Manager/ManagerHome";
+import RoleBasedRedirect from "../Components/RoleBasedRedirect";
 
 
 
@@ -82,11 +83,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: (
-          <HrRoute>
-            <ManagerHome></ManagerHome>
-          </HrRoute>
-        ),
+        element: <RoleBasedRedirect></RoleBasedRedirect>
       },
       {
         path: "/dashboard/add-asset",

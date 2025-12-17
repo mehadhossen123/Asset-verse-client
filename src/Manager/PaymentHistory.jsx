@@ -3,11 +3,12 @@ import PageWarper from '../CustomItem/PageWarper';
 import useAuth from '../Hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
+import Loader from '../Components/Loading/Loader';
 
 const PaymentHistory = () => {
     const {user}=useAuth()
     const axiosSecure=useAxiosSecure()
-    const {data:payments=[]} = useQuery({
+    const {data:payments=[],isLoading} = useQuery({
       queryKey: ["payments",user?.email],
       enabled:!!user?.email,
       queryFn:async()=>{
@@ -15,6 +16,9 @@ const PaymentHistory = () => {
          return res.data.data;
       }
     });
+    if(isLoading){
+      return <Loader></Loader>
+    }
    
     return (
       <PageWarper>

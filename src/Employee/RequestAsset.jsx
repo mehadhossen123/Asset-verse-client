@@ -19,7 +19,7 @@ const RequestAsset = () => {
 
   useEffect(() => {
     fetch(
-      ` http://localhost:5000/assets?limit=${limit}&skip=${
+      ` https://asset-verse-server-swart.vercel.app/assets?limit=${limit}&skip=${
         currentPage * limit
       }&search=${searchText}`
     )

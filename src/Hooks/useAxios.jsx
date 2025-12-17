@@ -4,7 +4,7 @@ import React from 'react';
 
 const useAxios = () => {
     const instance = axios.create({
-      baseURL: "http://localhost:5000",
+      baseURL: "https://asset-verse-server-swart.vercel.app",
     });
 
     return  instance

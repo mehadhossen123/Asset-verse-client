@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import useAuth from '../Hooks/useAuth';
 import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../Hooks/useAxiosSecure';
+import Loader from '../Components/Loading/Loader';
 
 const MyTeam = () => {
     const { user } = useAuth();
@@ -14,7 +15,7 @@ const MyTeam = () => {
         return res.data.data;
       },
     });
-  const{ data:teams=[]}=useQuery({
+  const{ data:teams=[],isLoading}=useQuery({
     queryKey:["teams",selectCompany],
     enabled:!!selectCompany,
     queryFn:async ()=>{
@@ -22,6 +23,9 @@ const MyTeam = () => {
         return res.data.data;
     }
   })
+  if(isLoading){
+    return <Loader></Loader>
+  }
  
     return (
       <div>

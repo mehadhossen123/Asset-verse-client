@@ -6,6 +6,7 @@ import { ImCross } from "react-icons/im";
 import { FcApprove } from "react-icons/fc";
 import Swal from 'sweetalert2';
 import PageWarper from '../CustomItem/PageWarper';
+import Loader from '../Components/Loading/Loader';
 
 
 const RequestedAsset = () => {
@@ -13,14 +14,16 @@ const RequestedAsset = () => {
 
     
       const { user } = useAuth();
-      const { data:requestedAsset = [] ,refetch} = useQuery({
+      const { data:requestedAsset = [] ,refetch,isLoading} = useQuery({
         queryKey: ["requests", user?.email],
         queryFn: async () => {
           const res = await axiosSecure.get(`/requests?email=${user?.email}`);
           return res.data.data;
         },
       });
-    //   console.log(requestedAsset)
+  if(isLoading){
+    return <Loader></Loader>
+  }
 
 
 
@@ -111,8 +114,8 @@ const RequestedAsset = () => {
     return (
       <PageWarper>
         <div>
-          <h1 className="text-red-700">
-            All requested asset :{requestedAsset.length}{" "}
+          <h1 className="text-3xl lg:text-5xl font-bold my-5 text-center text-white ">
+            Total  requested asset :{requestedAsset.length}{" "}
           </h1>
           <div className="overflow-x-auto">
             <table className="table">
