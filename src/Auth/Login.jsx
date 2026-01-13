@@ -13,6 +13,21 @@ import Swal from "sweetalert2";
 const Login = () => {
   const location = useLocation();
    const [show ,setShow]=useState()
+   const [demoPass,setDemoPass]=useState('')
+   const [demoEmail,setDemoEmail]=useState(' ')
+   
+   const handleDemoCrediantial=(role)=>{
+    if(role==='hr'){
+      setDemoEmail("mosaref@gmail.com");
+      setDemoPass("123456")
+    }
+    if(role==='user'){
+      setDemoEmail("liton@gmail.com");
+      setDemoPass(123456)
+    }
+
+   }
+
    
   
 
@@ -69,6 +84,7 @@ const Login = () => {
               <label className="label font-semibold">Email</label>
               <input
                 type="email"
+                value={demoEmail}
                 placeholder="Enter your email address"
                 {...register("email", { required: true })}
                 className="input input-bordered w-full h-12 text-lg px-4"
@@ -82,6 +98,7 @@ const Login = () => {
             <div className="relative">
               <label className="label font-semibold">Password</label>
               <input
+              value={demoPass}
                 type={`${show === true ? "text" : "password"}`}
                 placeholder="Enter your password"
                 {...register("password", {
@@ -116,6 +133,23 @@ const Login = () => {
             <button type="submit" className="button w-full">
               Login
             </button>
+            <div>
+              <h1 className="text-center  text-blue-400 my-3">Demo Login</h1>
+              <div className="flex justify-between ">
+                <button
+                  onClick={() => handleDemoCrediantial("hr")}
+                  className="btn"
+                >
+                  login as hr
+                </button>
+                <button
+                  onClick={() => handleDemoCrediantial("user")}
+                  className="btn"
+                >
+                  login as user
+                </button>
+              </div>
+            </div>
           </form>
         </div>
       </div>
